@@ -1,0 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Layout  from './components/layout';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import 'aos/dist/aos.css';
+import './styles/less/tool.less';
+import './styles/less/pages.less';
+import './styles/less/upgrade.less';
+import store from './states/store';
+import translations from './translations';
+import { IntlProvider } from 'react-redux-multilingual';
+ReactDOM.render( <Provider store={store}><IntlProvider translations={translations} locale='vn'><Layout/> </IntlProvider> </Provider>, document.getElementById('root'));
