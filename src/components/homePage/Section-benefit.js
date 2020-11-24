@@ -1,17 +1,20 @@
 import React from "react";
 import {filterData, transformDate} from "./index";
+import {useTranslate} from 'react-redux-multilingual';
 
 const SectionBenefit = ({data}) => {
+    const lang=useTranslate();
     return (
         <section className="section section-benefit">
             <div className="bs-container">
                 <div className="bs-row">
                     <div className="bs-col">
                         <div className="module module-benefit">
-                            <p className="text-after" data-aos="fade-down" data-aos-delay="500">LỢI ÍCH</p>
+                            <p className="text-after" data-aos="fade-down" data-aos-delay="500">{lang('benefit_boxShadow',{value:''})}
+                            </p>
                             <div className="module-header">
                                 <h2 className="title"  data-aos="fade-right">
-                                    LỢI ÍCH - JOBBOOKING
+                                    {lang('title_benefit_index',{value:''})}
                                 </h2>
                             </div>
                             <div className="module-content" data-aos="fade-up" data-aos-delay="500">

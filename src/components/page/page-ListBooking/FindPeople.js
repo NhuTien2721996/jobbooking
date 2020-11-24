@@ -5,11 +5,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
     getAllCityRequest, getAllDistrictRequest,
     getAllNationsRequest,
-    getAllPeoplePageRequest, getAllWard, getAllWardRequest,
+    getAllPeoplePageRequest, getAllWardRequest,
     getSelectsRequest
 } from "../../../states/duck/pages/findPeople/action";
 import {getDate} from "../../homePage";
 import {useTranslate, withTranslate} from 'react-redux-multilingual';
+
+const showRating=(number)=>{
+    let star=[];
+    for (let i=1;i<=number;i++){
+      star.push("fas fa-star start__content--item")
+    }
+    return star;
+}
 
 const FindPeople = () => {
     const dispatch = useDispatch();
@@ -36,14 +44,41 @@ const FindPeople = () => {
             position: "relative",
             paddingRight: "32px"
         }),
-        // placeholder: (provided) => ({
-        //     ...provided,
-        //     top: "50%",
-        //     transform: "translateY(-50%)",
-        //     fontSize: "12px",
-        //     position: "absolute",
-        //     whiteSpace: "nowrap"
-        // }),
+        indicatorSeparator: (provided) => ({
+            ...provided,
+            display: "none"
+        }),
+        indicatorsContainer: (provided) => ({
+            ...provided,
+            position: "absolute",
+            top: "0",
+            right: "0"
+        }),
+        singleValue: (provided) => ({
+            ...provided,
+            top: "65%",
+            transform: "translateY(-50%)",
+            fontSize: "14px"
+        }),
+        menu: (provided) => ({
+            ...provided,
+            zIndex: "10",
+        })
+    }
+    const customStylesNation = {
+        container: (provided) => ({
+            ...provided,
+            marginBottom: "10px",
+            pointerEvents: "none"
+        }),
+        control: (provided) => ({
+            ...provided,
+            minHeight: "unset",
+            height: "35px",
+            border: "1px solid #b0d1e4",
+            position: "relative",
+            paddingRight: "32px"
+        }),
         indicatorSeparator: (provided) => ({
             ...provided,
             display: "none"
@@ -66,11 +101,11 @@ const FindPeople = () => {
         })
     }
     const rating = [
-        { value: '1', label: '1 sao' },
-        { value: '2', label: '2 sao' },
-        { value: '3', label: '3 sao' },
-        { value: '4', label: '4 sao' },
-        { value: '5', label: '5 sao' },
+        {value: '1', label: '1 sao'},
+        {value: '2', label: '2 sao'},
+        {value: '3', label: '3 sao'},
+        {value: '4', label: '4 sao'},
+        {value: '5', label: '5 sao'},
     ]
     let html = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -147,8 +182,6 @@ const FindPeople = () => {
             dispatch(getAllWardRequest(codeDistrict))
         }
     }, [codeDistrict]);
-
-
     return (
         <section className="section section-find">
             <div className="bs-container">
@@ -182,10 +215,9 @@ const FindPeople = () => {
                                                 </div>
                                                 <div className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
 
-                                                    <Select options={dataSelects}
-                                                            placeholder={'Chọn nghề nghiệp'}
-                                                            styles={customStyles}
-                                                        // onChange={(val) => setKeyword(val.value)}
+                                                    <Select
+                                                        placeholder={'Chọn nghề nghiệp'}
+                                                        styles={customStyles}
                                                     />
                                                 </div>
                                                 {toggleSearch ?
@@ -193,11 +225,9 @@ const FindPeople = () => {
                                                         <div
                                                             className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
                                                             <Select options={dataNations}
-                                                                    placeholder={'Chọn lĩnh vực'}
-                                                                    styles={customStyles}
-                                                                // onChange={(val) => setKeyword(val.value)}
-                                                                // defaultValue={dataNations[0]}
+                                                                    styles={customStylesNation}
                                                                     value={dataNations.filter(item => item.label === "Việt Nam")}
+                                                                    disabled
                                                             />
                                                         </div>
                                                         <div
@@ -252,7 +282,7 @@ const FindPeople = () => {
                                                         >{lang('search', {value: ''})}
                                                         </button>
                                                         <span className="show_search"
-                                                              onClick={() => getFormSearch(setToggleSearch(!toggleSearch))}>{toggleSearch ? "Ẩn tìm kiếm chính xác" : "Tìm kiếm chính xác"}</span>
+                                                              onClick={() => getFormSearch(setToggleSearch(!toggleSearch))}>{toggleSearch ? lang('hide_search_detail', {value: ''}) : lang('search_detail', {value: ''})}</span>
                                                     </div>
 
                                                 </div>
@@ -261,94 +291,109 @@ const FindPeople = () => {
 
                                     </div>
                                 </div>
-                                <div className="content-list">
-                                    <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
-                                        {dataPeoplePage.length > 0 ? dataPeoplePage.map((item, index) => {
-                                            return <div
-                                                className="bs-col tn-100-5 xs-100-5 sm-50-10 md-50-15 lg-33-15"
-                                                key={index}>
-                                                <div className="item" data-aos="fade-up" data-aos-delay="300">
-                                                    <div className="avatar">
-                                                        <img
-                                                            src={`https://api.jobbooking.com/Upload/Customer/${getDate(dataPeoplePage)[index]}/${item.filename1}`}
-                                                            alt=""/>
-                                                    </div>
-                                                    <div className="info">
-                                                        <p className="name">{item.fullname}</p>
-                                                        <p className="rating">
-                                                        <span className="star">
-                                                            {item.rating}
-                                                            <i className="fas fa-star"></i>
-                                                            <i className="fas fa-star"></i>
-                                                            <i className="fas fa-star"></i>
-                                                            <i className="fas fa-star"></i>
-                                                            <i className="fas fa-star"></i>
-                                                        </span>
-                                                            Đánh giá
-                                                            <span className="number">34</span>
-                                                            Đã làm
-                                                            <span className="number">12</span>
-                                                        </p>
-                                                        <p className="field">
-                                                            <span className="name">Lĩnh vực:Giải trí</span>
-                                                            <span className="name">Ca sĩ tự do</span>
-                                                        </p>
-                                                        <p className="address">
-                                                            <i className="fas fa-map-marker-alt"></i>
-                                                            {item.fulladdress2}
-                                                        </p>
-                                                        <p className="price">
-                                                            <i className="fas fa-dollar-sign"></i>2.000.000
-                                                        </p>
-                                                    </div>
-                                                    <button className="btn-contact">Liên hệ
-                                                        <span className="item"><img src="/images/arrow-right.png"
-                                                                                    alt=""/></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        }) : <div className="bs-col tn-100-5">
-                                            <p className="noti" style={{textAlign: "center"}}>Không có dữ liệu</p>
-                                        </div>}
-                                    </div>
-                                    <div className="paginator" data-aos="fade-up">
-                                        {html.length > 1 ?
-                                            <ul className="list">
-                                                {page > 1 ? <li className="list-item btn__control"
-                                                                onClick={() => setPage(page - 1)}>
-                                                        Prev
-                                                    </li>
-                                                    :
-                                                    <li className="list-item btn__control" style={{cursor: "no-drop"}}>
-                                                        Prev
-                                                    </li>
-                                                }
-
-                                                {html.map((item, index) => {
-                                                    return <li className={`list-item ${page === item ? "active" : ""}`}
-                                                               onClick={() => setPage(item)}
-                                                               key={index}>
-                                                        {item}
-                                                    </li>
-                                                })}
-                                                {page < html.length ?
-                                                    <li className="list-item btn__control"
-                                                        onClick={() => setPage(page + 1)}>
-                                                        Next
-                                                    </li>
-                                                    :
-                                                    <li className="list-item btn__control" style={{cursor: "no-drop"}}>
-                                                        Next
-                                                    </li>
-                                                }
-
-
-                                            </ul> : ""}
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="bs-container custom-container">
+                <div className="content-list">
+                    <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
+                        {dataPeoplePage.length > 0 ? dataPeoplePage.map((item, index) => {
+                            return <div
+                                className="bs-col tn-100-5 xs-100-5 sm-50-10 md-50-15 lg-33-15"
+                                key={index}>
+                                <div className="item" data-aos="fade-up" data-aos-delay="300">
+                                    <div className="avatar">
+                                        <img
+                                            src={`https://api.jobbooking.com/Upload/Customer/${getDate(dataPeoplePage)[index]}/${item.filename1}`}
+                                            alt=""/>
+                                    </div>
+                                    <div className="info">
+                                        <p className="name">{item.fullname}</p>
+                                        <p className="rating">
+                                            <span className="star_content">
+                                                {showRating(item.rating).map((item,index)=>{
+                                                    return <i className={item} key={index} style={{color:'#ffc400', fontSize:'14px'}}></i>
+                                                })}
+                                            </span>
+                                           |  Tham gia : {item.datecreatestring}
+                                        </p>
+                                        <p className="field">
+                                            <span className="name" style={{width: "100%"}}>{item.fieldname}</span>
+                                        </p>
+                                        <p className="address">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                            {item.fulladdress2}
+                                        </p>
+                                        <p className="address">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                            Tham gia | Phá hợp
+                                            đồng: {item.numofjob1} | {item.numofjob3 ? item.numofjob3 : 0}
+                                        </p>
+                                        <p className="address">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                            Hoàn thành | Tỉ
+                                            lệ: {item.numofjob4 ? item.numofjob4 : 0} | {item.percenfinishstring ? item.percenfinishstring : "0%"}
+                                        </p>
+                                        <p className="address skills">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                            Kỹ năng: <span className="content">
+                                             {item.skills}
+                                        </span>
+                                        </p>
+                                        <p className="address skills">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                            Nghề nghiệp: <span className="content">
+                                             {item.careers}
+                                        </span>
+                                        </p>
+
+                                    </div>
+                                    <span className="view">View : {item.views}</span>
+                                    <button className="btn-contact">{lang('button_contact',{value:''})}
+                                        <span className="item"><img src="/images/arrow-right.png"
+                                                                    alt=""/></span>
+                                    </button>
+                                </div>
+                            </div>
+                        }) : <div className="bs-col tn-100-5">
+                            <p className="noti" style={{textAlign: "center"}}>Không có dữ liệu</p>
+                        </div>}
+                    </div>
+                    <div className="paginator" data-aos="fade-up">
+                        {html.length > 1 ?
+                            <ul className="list">
+                                {page > 1 ? <li className="list-item btn__control"
+                                                onClick={() => setPage(page - 1)}>
+                                        Prev
+                                    </li>
+                                    :
+                                    <li className="list-item btn__control" style={{cursor: "no-drop"}}>
+                                        Prev
+                                    </li>
+                                }
+
+                                {html.map((item, index) => {
+                                    return <li className={`list-item ${page === item ? "active" : ""}`}
+                                               onClick={() => setPage(item)}
+                                               key={index}>
+                                        {item}
+                                    </li>
+                                })}
+                                {page < html.length ?
+                                    <li className="list-item btn__control"
+                                        onClick={() => setPage(page + 1)}>
+                                        Next
+                                    </li>
+                                    :
+                                    <li className="list-item btn__control" style={{cursor: "no-drop"}}>
+                                        Next
+                                    </li>
+                                }
+
+
+                            </ul> : ""}
                     </div>
                 </div>
             </div>

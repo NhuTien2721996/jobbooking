@@ -8,8 +8,14 @@ export default {
             title_banner_job_done:'work done {value}',
             title_banner_job_received:'work received {value}',
             title_header:'people search {value}',
-            search:'Search {value}'
-
+            search:'Search {value}',
+            search_detail:'Exact search {value}',
+            hide_search_detail:'Hide Exact search {value}',
+            title_benefit_index:'Benefit - Jobbooking {value}',
+            title_news_index:'news - events {value}',
+            benefit_boxShadow:'BENEFIT {value}',
+            news_boxShadow:'NEWS {value}',
+            button_contact:'Contact {value}'
 
         }
     },
@@ -22,7 +28,14 @@ export default {
             title_banner_job_done:'việc đã làm {value}',
             title_banner_job_received:'việc đã nhận {value}',
             title_header:'tìm người {value}',
-            search:'Tìm kiếm {value}'
+            search:'Tìm kiếm {value}',
+            search_detail:'Tìm kiếm chính xác {value}',
+            hide_search_detail:'Ẩn tìm kiếm chính xác {value}',
+            title_benefit_index:'Lợi ích - Jobbooking',
+            title_news_index:'tin tức - sự kiện {value}',
+            benefit_boxShadow:'LỢI ÍCH {value}',
+            news_boxShadow:'TIN TỨC {value}',
+            button_contact:'Liên hệ {value}'
 
         }
     }

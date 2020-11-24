@@ -1,21 +1,25 @@
 import React from "react";
 import {BsSlide} from "../../bases/shared";
-import {useDispatch} from "react-redux";
 import {filterData, transformDate} from "./index";
 import {Link} from "react-router-dom";
+import {useTranslate} from 'react-redux-multilingual';
 
 
 const SectionNews = ({data}) => {
+    const lang=useTranslate();
+
     return (
         <section className="section section-news">
             <div className="bs-container">
                 <div className="bs-row">
                     <div className="bs-col">
                         <div className="module module-news">
-                            <p className="text-after">TIN TỨC</p>
+                            <p className="text-after">{lang('news_boxShadow',{value:''})}
+                            </p>
                             <div className="module-header">
                                 <h2 className="title" data-aos="fade-right">
-                                    TIN TỨC - SỰ KIỆN
+                                    {lang('title_news_index',{value:''})}
+
                                 </h2>
                             </div>
                             <div className="module-content" data-aos="fade-up" data-aos-delay="500">
