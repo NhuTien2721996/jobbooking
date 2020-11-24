@@ -3,3 +3,5 @@ export const GET_TOP_PEOPLE="GET_TOP_PEOPLE";
 export const GET_SELECTS="GET_SELECTS";
 export const GET_ALL_NATIONS="GET_ALL_NATIONS";
 export const GET_ALL_CITY="GET_ALL_CITY";
+export const GET_ALL_DISTRICT="GET_ALL_DISTRICT";
+export const GET_ALL_WARD="GET_ALL_WARD";

@@ -8,7 +8,9 @@ const initialState = {
     peopleTop:[],
     selects:[],
     listNation:[],
-    listCity:[]
+    listCity:[],
+    listDistrict:[],
+    listWard:[]
 
 }
 const searchPeople = (state = initialState, action) => {
@@ -23,6 +25,11 @@ const searchPeople = (state = initialState, action) => {
             return {...state,listNation: action.data};
         case types.GET_ALL_CITY:
             return {...state,listCity: action.data};
+        case types.GET_ALL_DISTRICT:
+            return {...state,listDistrict: action.data};
+        case types.GET_ALL_WARD:
+            return {...state,listWard: action.data};
+
         default:
             return state;
     }

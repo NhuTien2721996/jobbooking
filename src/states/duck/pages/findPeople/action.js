@@ -66,3 +66,31 @@ export const getAllCity=data=>{
         data
     }
 }
+
+export const getAllDistrictRequest=(id)=>{
+    return (dispatch)=>{
+        return callApi(`com/get-dist-by-prov2/${id}`,'GET',null).then(res=>{
+            dispatch(getAllDistrict(res.data))
+        })
+    }
+}
+export const getAllDistrict=data=>{
+    return {
+        type:constants.GET_ALL_DISTRICT,
+        data
+    }
+}
+
+export const getAllWardRequest=(id)=>{
+    return (dispatch)=>{
+        return callApi(`com/get-ward-by-dist2/${id}`,'GET',null).then(res=>{
+            dispatch(getAllWard(res.data))
+        })
+    }
+}
+export const getAllWard=data=>{
+    return {
+        type:constants.GET_ALL_WARD,
+        data
+    }
+}

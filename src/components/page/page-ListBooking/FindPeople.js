@@ -3,9 +3,9 @@ import {useSelector, useDispatch} from "react-redux";
 import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
 import {
-    getAllCityRequest,
+    getAllCityRequest, getAllDistrictRequest,
     getAllNationsRequest,
-    getAllPeoplePageRequest,
+    getAllPeoplePageRequest, getAllWard, getAllWardRequest,
     getSelectsRequest
 } from "../../../states/duck/pages/findPeople/action";
 import {getDate} from "../../homePage";
@@ -18,6 +18,8 @@ const FindPeople = () => {
     const dataSelects = useSelector(state => state.searchPeople.selects);
     const dataNations = useSelector(state => state.searchPeople.listNation);
     const dataCity = useSelector(state => state.searchPeople.listCity);
+    const dataDistrict = useSelector(state => state.searchPeople.listDistrict);
+    const dataWard = useSelector(state => state.searchPeople.listWard);
     const [keyword, setKeyword] = useState("");
     const [page, setPage] = useState(1);
     const [toggleSearch, setToggleSearch] = useState(false);
@@ -34,14 +36,14 @@ const FindPeople = () => {
             position: "relative",
             paddingRight: "32px"
         }),
-        placeholder: (provided) => ({
-            ...provided,
-            top: "45%",
-            transform: "translateY(-100%)",
-            fontSize: "12px",
-            position: "absolute",
-            whiteSpace: "nowrap"
-        }),
+        // placeholder: (provided) => ({
+        //     ...provided,
+        //     top: "50%",
+        //     transform: "translateY(-50%)",
+        //     fontSize: "12px",
+        //     position: "absolute",
+        //     whiteSpace: "nowrap"
+        // }),
         indicatorSeparator: (provided) => ({
             ...provided,
             display: "none"
@@ -54,40 +56,52 @@ const FindPeople = () => {
         }),
         singleValue: (provided) => ({
             ...provided,
-            top: "45%",
-            transform: "translateY(-100%)",
-            fontSize: "12px"
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "14px"
         }),
         menu: (provided) => ({
             ...provided,
             zIndex: "10",
         })
     }
-
+    const rating = [
+        { value: '1', label: '1 sao' },
+        { value: '2', label: '2 sao' },
+        { value: '3', label: '3 sao' },
+        { value: '4', label: '4 sao' },
+        { value: '5', label: '5 sao' },
+    ]
     let html = [];
     for (let i = 1; i <= pageCount; i++) {
         html.push(i)
     }
-    const onSearch = (keyword) => {
-        let people = {
-            customer_career: null,
-            districtid: null,
-            field: keyword,
-            pageindex: page,
-            pagesize: 12,
-            provinceid: null,
-            ratingfrom: null,
-            ratingto: null,
-            skills: [""],
-            wardid: null,
-        }
-        dispatch(getAllPeoplePageRequest(people))
-    }
     const lang = useTranslate();
-    const getFormSearch=()=>{
+    const getFormSearch = () => {
         dispatch(getAllNationsRequest());
         dispatch(getAllCityRequest());
     }
+    const [codeCity, setCodeCity] = useState("");
+    const [codeDistrict, setCodeDistrict] = useState('');
+    const [codeWard, setCodeWard] = useState('');
+    const [ratingFrom, setRatingFrom] = useState('');
+    const [ratingTo, setRatingTo] = useState('');
+    const onSearch = (keyword) => {
+        let people = {
+            customer_career: null,
+            districtid: codeDistrict,
+            field: keyword,
+            pageindex: page,
+            pagesize: 12,
+            provinceid: codeCity,
+            ratingfrom: ratingFrom,
+            ratingto: ratingTo,
+            skills: [""],
+            wardid: codeWard,
+        }
+        dispatch(getAllPeoplePageRequest(people))
+    }
+
     useEffect(() => {
         let people;
         if (keyword) {
@@ -123,6 +137,16 @@ const FindPeople = () => {
         dispatch(getSelectsRequest())
 
     }, []);
+    useEffect(() => {
+        if (codeCity) {
+            dispatch(getAllDistrictRequest(codeCity))
+        }
+    }, [codeCity]);
+    useEffect(() => {
+        if (codeDistrict) {
+            dispatch(getAllWardRequest(codeDistrict))
+        }
+    }, [codeDistrict]);
 
 
     return (
@@ -161,7 +185,7 @@ const FindPeople = () => {
                                                     <Select options={dataSelects}
                                                             placeholder={'Chọn nghề nghiệp'}
                                                             styles={customStyles}
-                                                            onChange={(val) => setKeyword(val.value)}
+                                                        // onChange={(val) => setKeyword(val.value)}
                                                     />
                                                 </div>
                                                 {toggleSearch ?
@@ -171,9 +195,9 @@ const FindPeople = () => {
                                                             <Select options={dataNations}
                                                                     placeholder={'Chọn lĩnh vực'}
                                                                     styles={customStyles}
-                                                                    // onChange={(val) => setKeyword(val.value)}
-                                                                    // defaultValue={dataNations[0]}
-                                                                    value={dataNations.filter(item => item.label=== "Việt Nam")}
+                                                                // onChange={(val) => setKeyword(val.value)}
+                                                                // defaultValue={dataNations[0]}
+                                                                    value={dataNations.filter(item => item.label === "Việt Nam")}
                                                             />
                                                         </div>
                                                         <div
@@ -181,39 +205,39 @@ const FindPeople = () => {
                                                             <Select options={dataCity}
                                                                     placeholder={'Chọn tỉnh thành'}
                                                                     styles={customStyles}
-                                                                    // onChange={(val) => setKeyword(val.value)}
+                                                                    onChange={(val) => setCodeCity(val.value)}
                                                             />
                                                         </div>
                                                         <div
                                                             className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
-                                                            <Select options={dataSelects}
+                                                            <Select options={dataDistrict}
                                                                     placeholder={'Chọn quận huyện'}
                                                                     styles={customStyles}
-                                                                    onChange={(val) => setKeyword(val.value)}
+                                                                    onChange={(val) => setCodeDistrict(val.value)}
                                                             />
                                                         </div>
                                                         <div
                                                             className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
-                                                            <Select options={dataSelects}
+                                                            <Select options={dataWard}
                                                                     placeholder={'Chọn phường xã'}
                                                                     styles={customStyles}
-                                                                    onChange={(val) => setKeyword(val.value)}
+                                                                    onChange={(val) => setCodeWard(val.value)}
                                                             />
                                                         </div>
                                                         <div
                                                             className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
-                                                            <Select options={dataSelects}
+                                                            <Select options={rating}
                                                                     placeholder={'Từ'}
                                                                     styles={customStyles}
-                                                                    onChange={(val) => setKeyword(val.value)}
+                                                                    onChange={(val) => setRatingFrom(val.value)}
                                                             />
                                                         </div>
                                                         <div
                                                             className="bs-col tn-50-5 xs-50-5 sm-33-10 md-33-15 lg-20-10">
-                                                            <Select options={dataSelects}
+                                                            <Select options={rating}
                                                                     placeholder={'Đến'}
                                                                     styles={customStyles}
-                                                                    onChange={(val) => setKeyword(val.value)}
+                                                                    onChange={(val) => setRatingTo(val.value)}
                                                             />
                                                         </div>
                                                     </React.Fragment> :
