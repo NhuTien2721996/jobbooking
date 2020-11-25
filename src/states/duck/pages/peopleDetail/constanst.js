@@ -1,0 +1,1 @@
+export const GET_PEOPLE_DETAIL="GET_PEOPLE_DETAIL";

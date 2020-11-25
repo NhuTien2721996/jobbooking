@@ -46,6 +46,19 @@ export const getDate=(data)=>{
     }
     return newDay;
 }
+export const getDateModal=(data)=>{
+    let dateArr = [];
+    let time = [];
+    let newDay = [];
+    for (let i = 0; i <= data.length - 1; i++) {
+        dateArr.push(data[i].customercreatedate);
+    }
+    for (let i = 0; i <= dateArr.length - 1; i++) {
+        time.push(new Date(dateArr[i]))
+        newDay.push(time[i].getFullYear() + "/" +((time[i].getMonth() + 1)>10? (time[i].getMonth() + 1): "0"+(time[i].getMonth() + 1)) + "/" + (time[i].getDate()>10? time[i].getDate():"0"+time[i].getDate()));
+    }
+    return newDay;
+}
 export const getDateJob=(data)=>{
     let dateArr = [];
     let time = [];
