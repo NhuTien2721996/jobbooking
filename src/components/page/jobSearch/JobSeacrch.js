@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useSelector, useDispatch} from "react-redux";
 import {getAllJobRequest} from "../../../states/duck/pages/findJob/action";
-import {getDateJob} from "../../homePage";
+import {getDateJob} from "../../../constants/ConfigConstants";
 
 
 

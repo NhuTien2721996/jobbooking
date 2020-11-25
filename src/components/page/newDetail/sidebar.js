@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {transformDate} from "../../homePage";
+import {transformDate} from "../../../constants/ConfigConstants";
 
 
 const SideBar = ({newDetailArr}) => {

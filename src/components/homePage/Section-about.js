@@ -1,8 +1,10 @@
-import React, { useState} from "react";
-import {filterData, transformDate} from "./index";
+import React, {useState} from "react";
+import SectionAboutItem from "./homePageItem/Section-about-item";
+import {useSelector} from "react-redux";
+import {filterData} from "../../constants/ConfigConstants";
 
 const ShowTab = (tabItems, keyword) => {
-    var html = null;
+    let html = null;
     const tabItemsClone = [...tabItems];
     if (tabItems.length > 0) {
         const tabItemClone = tabItemsClone.find(item => {
@@ -12,9 +14,13 @@ const ShowTab = (tabItems, keyword) => {
     }
     return html;
 };
-const SectionAbout = ({data}) => {
-    let tabData = filterData(data,1);
-    const [tabDefault, setTabDefault] = useState(tabData.length>0? tabData[0].name:"Kết nối thông minh");
+const SectionAbout = () => {
+    const data = useSelector(state => state.homePage);
+    let tabData = filterData(data, 1);
+    const [tabDefault, setTabDefault] = useState(tabData.length > 0 ? tabData[0].name : "Kết nối thông minh");
+    const onHandle = (name) => {
+        setTabDefault(name);
+    }
     return (
         <section className="section section-about">
             <div className="bs-container">
@@ -26,24 +32,10 @@ const SectionAbout = ({data}) => {
                                     <div className="tab-container">
                                         <div className="tab-control">
                                             <ul className="control-list">
-                                                {tabData.map((item, index) => {
-                                                    return (
-                                                        <li
-                                                            key={index}
-                                                            className={`control-list__item ${
-                                                                tabDefault === item.name ? "active" : ""
-                                                            }`}
-                                                            onClick={() => setTabDefault(item.name)}
-                                                        >
-                                                            <span className="img">
-                                                                <img src={`https://api.jobbooking.com//Temp/LandingPages/Feature/${transformDate(data,1)[index]}/${item.filename}`} className="icon" alt=""/>
-                                                                <img src={`https://api.jobbooking.com//Temp/LandingPages/Feature/${transformDate(data,1)[index]}/${item.filename2}`} className="icon-hover"
-                                                                     alt=""/>
-                                                            </span>
-                                                            <span className="name">{item.name}</span>
-                                                        </li>
-                                                    );
-                                                })}
+                                                <SectionAboutItem tabData={tabData}
+                                                                  tabDefault={tabDefault}
+                                                                  onHandle={onHandle}
+                                                />
                                             </ul>
                                         </div>
                                         <div className="tab-content">

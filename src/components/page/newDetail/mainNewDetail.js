@@ -1,5 +1,5 @@
 import React from "react";
-import {transformDate} from "../../homePage";
+import {transformDate} from "../../../constants/ConfigConstants";
 
 
 const MainNewDetail = ({newDetail}) => {

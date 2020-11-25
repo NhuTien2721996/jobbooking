@@ -1,7 +1,10 @@
 import React from "react";
-import {filterData} from "./index";
+import SectionBannerItem from "./homePageItem/Section-banner-item";
+import {useSelector} from "react-redux";
 
-const SectionBanner = ({data}) => {
+const SectionBanner = () => {
+    const data = useSelector(state => state.homePage);
+
     return (
         <section className="section section-banner">
             <div className="bs-container">
@@ -11,22 +14,7 @@ const SectionBanner = ({data}) => {
                             <div className="module-content">
                                 <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
                                     <div className="bs-col tn-100-5 xs-100-5 sm-100-10 md-50-15 lg-50-15">
-                                        {filterData(data,5).map((item,index)=>{
-                                            return <div className="item-text " data-aos="fade-right" key={index}>
-                                                <h1 className="title">
-                                                    {item.name}
-                                                </h1>
-
-                                                <p className="desc" dangerouslySetInnerHTML={{__html: item.content}} ></p>
-                                                <div className="button" data-aos="fade-right" data-aos-delay="500">
-                                                    <span className="text">JOINOW</span>
-                                                    <div className="arrow">
-                                                        <img src="/images/icon_arrow.png" alt=""/>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        })}
+                                        <SectionBannerItem data={data} />
                                     </div>
                                     <div className="bs-col tn-100-5 xs-100-5 sm-100-10 md-50-15 lg-50-15">
                                         <div className="item-icon" data-aos="fade-left">

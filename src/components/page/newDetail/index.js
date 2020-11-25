@@ -5,7 +5,7 @@ import MainNewDetail from "./mainNewDetail";
 import SideBar from "./sidebar";
 import {useParams} from "react-router-dom"
 import {getAllDataRequestHomePage} from "../../../states/duck/pages/homePage/action";
-import {filterData} from "../../homePage";
+import {filterData} from "../../../constants/ConfigConstants";
 
 
 export const NewDetail = () => {
