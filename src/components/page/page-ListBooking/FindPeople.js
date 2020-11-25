@@ -343,7 +343,9 @@ const FindPeople = () => {
                                             <span className="star_content">
                                                 {showRating(item.rating).map((item, index) => {
                                                     return <i className={item} key={index}
-                                                              style={{color: '#ffc400', fontSize: '14px'}}></i>
+                                                              style={{color: '#ffc400', fontSize: '14px'}}>
+
+                                                    </i>
                                                 })}
                                             </span>
                                                 | Tham gia : {item.datecreatestring}
@@ -352,27 +354,37 @@ const FindPeople = () => {
                                                 <span className="name" style={{width: "100%"}}>{item.fieldname}</span>
                                             </p>
                                             <p className="address">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fas fa-map-marker-alt">
+
+                                                </i>
                                                 {item.fulladdress2}
                                             </p>
                                             <p className="address">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fas fa-map-marker-alt">
+
+                                                </i>
                                                 Tham gia | Phá hợp
                                                 đồng: {item.numofjob1} | {item.numofjob3 ? item.numofjob3 : 0}
                                             </p>
                                             <p className="address">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fas fa-map-marker-alt">
+
+                                                </i>
                                                 Hoàn thành | Tỉ
                                                 lệ: {item.numofjob4 ? item.numofjob4 : 0} | {item.percenfinishstring ? item.percenfinishstring : "0%"}
                                             </p>
                                             <p className="address skills">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fas fa-map-marker-alt">
+
+                                                </i>
                                                 Kỹ năng: <span className="content">
                                              {item.skills}
                                         </span>
                                             </p>
                                             <p className="address skills">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fas fa-map-marker-alt">
+
+                                                </i>
                                                 Nghề nghiệp: <span className="content">
                                              {item.careers}
                                         </span>
@@ -427,7 +439,7 @@ const FindPeople = () => {
             </section>
             <div className={`bs-modal modal-top ${showModal}`}>
                 <div className="modal-frame">
-                    <div className="modal__backdrop"></div>
+                    <div className="modal__backdrop" />
                     <div className={`content-modal ${showModal}`}>
                         <span title="close" className="close__modal" onClick={() => setToggleModal(false)}>X</span>
                         <div className="body-modal">
@@ -443,9 +455,9 @@ const FindPeople = () => {
                                                     <img
                                                         src={`https://api.jobbooking.com/Temp/Customer_Careers/${transformDate}/${item}`}
                                                         alt=""/>
-                                                        <span className="style style-top-right"></span>
-                                                        <span className="style style-bottom-right"></span>
-                                                        <span className="style style-bottom-left"></span>
+                                                        <span className="style style-top-right"/>
+                                                        <span className="style style-bottom-right"/>
+                                                        <span className="style style-bottom-left"/>
                                                 </div>
 
                                             </div>
@@ -503,11 +515,11 @@ const FindPeople = () => {
                                                     <p className="title">thống kê</p>
                                                     <p className="star">
                                                     <span className="show_star">
-                                                      <i className="fas fa-star"></i>
-                                                      <i className="fas fa-star"></i>
-                                                      <i className="fas fa-star"></i>
-                                                      <i className="fas fa-star"></i>
-                                                      <i className="fas fa-star"></i>
+                                                      <i className="fas fa-star"/>
+                                                      <i className="fas fa-star"/>
+                                                      <i className="fas fa-star"/>
+                                                      <i className="fas fa-star"/>
+                                                      <i className="fas fa-star"/>
                                                     </span>
                                                     </p>
                                                 </div>
@@ -584,7 +596,7 @@ const FindPeople = () => {
                                                     <p className="star">
                                                     <span className="show_star">
                                                         {showRating(item.rating).map((item, index) => {
-                                                            return <i className={item} key={index}></i>
+                                                            return <i className={item} key={index}/>
                                                         })}
                                                     </span>
                                                     </p>
@@ -650,7 +662,7 @@ const FindPeople = () => {
                                             <input type="text" className="form-control" placeholder="Nhập nội dung..."/>
                                             <button className="btn-commom send-mess">Gửi đi</button>
                                             <button className="btn-commom send-mess respon" style={{display:'none'}}>
-                                                <i className="fas fa-paper-plane"></i>
+                                                <i className="fas fa-paper-plane"/>
                                             </button>
                                         </div>
 
@@ -668,7 +680,7 @@ const FindPeople = () => {
         </React.Fragment>
     );
 }
-var slideSettings = {
+let slideSettings = {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
@@ -683,11 +695,11 @@ var slideSettings = {
     touchMove: false,
     swipe: false,
     nextArrowSetting: {
-        label: <i className="fas fa-angle-left"></i>,
+        label: <i className="fas fa-angle-left"/>,
         className: "list__control next__btn"
     },
     prevArrowSetting: {
-        label: <i className="fas fa-angle-left"></i>,
+        label: <i className="fas fa-angle-left"/>,
         className: "list__control prev__btn"
     },
     responsive: [
