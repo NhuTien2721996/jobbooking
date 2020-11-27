@@ -3,7 +3,6 @@ import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {getAllRoutesMenuRequest} from "../../states/duck/layout/headerReducer/actions";
-import $ from "jquery"
 import {IntlActions} from "react-redux-multilingual";
 
 const Header = ({location}) => {
@@ -25,7 +24,7 @@ const Header = ({location}) => {
     });
     useEffect(() => {
         dispatch(getAllRoutesMenuRequest())
-    }, []);
+    }, [dispatch]);
         // $(document).ready(function () {
         //     $(".menu-list__link").click(function () {
         //         $(".menu-list__link").removeClass('active');

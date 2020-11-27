@@ -1,7 +1,6 @@
 import React from 'react';
 import HomePage from '../components/homePage'
 import BookingList from "../components/page/page-ListBooking";
-import Job from "../components/page/jobSearch";
 
 const routes = [
     {
@@ -24,12 +23,12 @@ const routes = [
         path: '/job',
         exact: false,
         name: 'Hướng dẫn',
-        main: () => <Job/>,
+        main: () => <HomePage/>,
     },{
         path: '/tim-viec',
         exact: false,
         name: 'Tìm việc',
-        main: () => <Job />,
+        main: () => <BookingList />,
     },
     {
         path: '/tim-nguoi',

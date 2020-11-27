@@ -67,6 +67,20 @@ export const getAllCity=data=>{
     }
 }
 
+export const getAllKeywordRequest=(id)=>{
+    return (dispatch)=>{
+        return callApi(`news/get-fields-career/${id}`,'GET',null).then(res=>{
+            dispatch(getAllKeyword(res.data))
+        })
+    }
+}
+export const getAllKeyword=keyword=>{
+    return {
+        type:constants.GET_ALL_KEYWORD,
+        keyword
+    }
+}
+
 export const getAllDistrictRequest=(id)=>{
     return (dispatch)=>{
         return callApi(`com/get-dist-by-prov2/${id}`,'GET',null).then(res=>{
@@ -93,4 +107,25 @@ export const getAllWard=data=>{
         type:constants.GET_ALL_WARD,
         data
     }
+}
+export const toggleModal=status=>{
+    return {
+        type:constants.TOGGLE_MODAL_PEOPLE_DETAIL,
+        status
+    }
+}
+
+export const getPageNumber=page=>{
+    return {
+        type:constants.GET_PAGE_NUMBER,
+        page
+    }
+
+}
+export const toggleFormSearch=status=>{
+    return {
+        type:constants.TOGGLE_FORM_SEARCH,
+        status
+    }
+
 }

@@ -3,13 +3,13 @@ import {withRouter} from "react-router-dom";
 
 const ScrollTop = ({history}) => {
     useEffect(() => {
-        const unlisten = history.listen(() => {
+        const unListen = history.listen(() => {
             window.scrollTo(0, 0);
         });
         return () => {
-            unlisten();
+            unListen();
         }
-    }, []);
+    }, [history]);
     return <React.Fragment/>
 
 }

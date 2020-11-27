@@ -1,8 +1,19 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {filterData} from "../../../constants/ConfigConstants";
 
 
-const HeaderPage = ({newDetail}) => {
+const HeaderPage = () => {
+    const data = useSelector(state => state.homePage);
+    const match = useParams();
+    let newDetail = [];
+    let newDetailArr = filterData(data, 4);
+    for (let i = 0; i <= newDetailArr.length - 1; i++) {
+        if (match && newDetailArr[i].id === match.id) {
+            newDetail.push(newDetailArr[i])
+        }
+    }
     return (
         <section className="section section-headerPage" data-aos="fade-up">
             <div className="bs-container">

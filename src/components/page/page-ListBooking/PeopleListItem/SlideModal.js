@@ -3,8 +3,10 @@ import {BsSlide} from "../../../../bases/shared";
 import {useSelector} from "react-redux";
 
 
-const ModalPeoplePageSlide = ({customer}) => {
+const ModalPeoplePageSlide = () => {
     const images = useSelector(state => state.peopleDetail.images);
+    const customer = useSelector(state => state.peopleDetail.customer);
+
     let newImagesArr = images.split(",");
     let date = customer.createddate;
     let newDate = new Date(date)

@@ -1,10 +1,25 @@
 import React from 'react';
 import {transformDateFooter} from "../../../constants/ConfigConstants";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
-const FooterItem = ({footerTitle,socialMedia,socialServiceDetail,newFooter}) => {
-
+const FooterItem = () => {
+    const footer = useSelector(state => state.dataFooter.dataFooter);
+    let newFooter = Object.values(footer);
+    let footerTitle = [];
+    let isSocial = [];
+    for (let i = 0; i <= newFooter.length - 1; i++) {
+        if (newFooter[i].isfooter === true) {
+            footerTitle.push(newFooter[i])
+        }
+        if (newFooter[i].length > 0) {
+            isSocial.push(newFooter[i])
+        }
+    }
+    let socialMedia = isSocial[0];
+    let socialService = isSocial.slice(1, (isSocial.length));
+    let socialServiceDetail = socialService[0];
     return (
         <React.Fragment>
             {footerTitle.map((item, index) => {

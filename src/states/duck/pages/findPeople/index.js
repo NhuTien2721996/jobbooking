@@ -10,7 +10,11 @@ const initialState = {
     listNation:[],
     listCity:[],
     listDistrict:[],
-    listWard:[]
+    listWard:[],
+    toggleModal:false,
+    page:1,
+    toggleFormSearch:false,
+    keyword:''
 
 }
 const searchPeople = (state = initialState, action) => {
@@ -29,7 +33,14 @@ const searchPeople = (state = initialState, action) => {
             return {...state,listDistrict: action.data};
         case types.GET_ALL_WARD:
             return {...state,listWard: action.data};
-
+        case types.TOGGLE_MODAL_PEOPLE_DETAIL:
+            return {...state,toggleModal:action.status};
+        case types.GET_PAGE_NUMBER:
+            return {...state,page:action.page};
+        case types.TOGGLE_FORM_SEARCH:
+            return {...state,toggleFormSearch:action.status};
+        case types.GET_ALL_KEYWORD:
+            return {...state,keyword:action.keyword};
         default:
             return state;
     }

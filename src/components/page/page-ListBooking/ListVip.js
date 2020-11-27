@@ -15,39 +15,46 @@ const ListVip = () => {
             pageSize: 6,
         }
         dispatch(getTopPeopleRequest(topPeople))
-    }, []);
+    }, [dispatch]);
     return (
         <React.Fragment>
             {topPeople.lenght > 0 ?
-                <section className="section section-vip">
-                    <div className="image-after">
-                        <img src="/images/image-after.png" alt=""/>
-                    </div>
-                    <div className="bs-container">
-                        <div className="bs-row">
-                            <div className="bs-col">
-                                <div className="module-vip">
-                                    <div className="module-header">
-                                        <h2 className="title" data-aos="fade-left" data-aos-delay="500">
-                                            DANH SÁCH VIP
-                                        </h2>
-                                    </div>
-                                    <div className="module-content" data-aos="fade-up" data-aos-delay="600">
-                                        <Slide/>
-                                    </div>
+            <section className="section section-vip">
+                <div className="image-after">
+                    <img src="/images/image-after.png" alt=""/>
+                </div>
+                <div className="bs-container">
+                    <div className="bs-row">
+                        <div className="bs-col">
+                            <div className="module-vip">
+                                <div className="module-header">
+                                    <h2 className="title" data-aos="fade-left" data-aos-delay="500">
+                                        DANH SÁCH VIP
+                                    </h2>
+                                </div>
+                                <div className="module-content" data-aos="fade-up" data-aos-delay="600">
+                                    <BsSlide {...slideSettings}>
+                                        <Item/>
+                                        <Item/>
+                                        <Item/>
+                                        <Item/>
+                                        <Item/>
+                                    </BsSlide>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section> : ""}
+                </div>
+            </section>:""}
 
         </React.Fragment>
 
     );
 }
 
-var slideSettings = {
-    slidesToShow: 1,
+let slideSettings = {
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
     centerMode: false,
@@ -72,7 +79,7 @@ var slideSettings = {
         {
             breakpoint: 1200,
             settings: {
-                slidesToShow: 1,
+                slidesToShow: 4,
                 slidesToScroll: 1
             }
         },
@@ -85,118 +92,22 @@ var slideSettings = {
         }
     ]
 };
-export const Slide = () => {
-    return (
-        <BsSlide {...slideSettings}>
-            <div className="item">
-                <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div className="item">
-                <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-25-15 lg-25-15">
-                        <div className="item-content">
-                            <div className="image">
-                                <img src="/images/layer-16.png" alt=""/>
-                                <div className="item-text">
-                                    <button className="btn btn_commom">LIÊN HỆ</button>
-                                    <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
-                                    <p className="industry">Nghề nghiệp: Ca sĩ</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </BsSlide>
-    );
-}
 
 export default ListVip;
+
+const Item = () => {
+    return (
+        <div className="item">
+            <div className="item-content">
+                <div className="image">
+                    <img src="/images/layer-16.png" alt=""/>
+                    <div className="item-text">
+                        <button className="btn btn_commom">LIÊN HỆ</button>
+                        <p className="name">TRƯƠNG LƯƠNG DĨNH</p>
+                        <p className="industry">Nghề nghiệp: Ca sĩ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

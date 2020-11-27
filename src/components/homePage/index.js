@@ -13,7 +13,8 @@ const HomePage = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllDataRequestHomePage())
-    }, []);
+
+    }, [dispatch]);
     return (
         <Fragment>
             <Helmet>
