@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect,Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AOS from "aos";
 import Header from "./header";
 import Footer from "./footer";
 import routes from "./../../states/routes";
 import $ from "jquery";
-import NewDetail from "../page/newDetail";
+// import NewDetail from "../page/newDetail";
 import ScrollTop from "./scrollTop";
 
-
+const NewDetail = lazy(() => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(import("../page/newDetail")), 500);
+  });
+});
 const  Layout = () => {
   useEffect(() => {
     AOS.init({
@@ -58,14 +62,17 @@ const  Layout = () => {
           children={({location}) => <Header location={location}/>}
 
       />
-      <Switch>
-        {showRoutes(routes)}
-        <Route path="/tin-tuc/:id"
-              exact={false}
-        >
+      <Suspense fallback={<div style={{textAlign:'center'}}><img src="https://jobbooking.com/static/images/loading.gif" alt=""/></div>}>
+        <Switch>
+          {showRoutes(routes)}
+          <Route path="/tin-tuc/:id"
+                 exact={false}
+          >
           <NewDetail/>
-        </Route>
-      </Switch>
+          </Route>
+        </Switch>
+
+      </Suspense>
       <Footer />
     </Router>
   );

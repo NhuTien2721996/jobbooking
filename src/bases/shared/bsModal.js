@@ -6,7 +6,7 @@ const BsModal = ({children, toggleModal, onClick, closeIcon}) => {
         if (toggleModal) {
             document.body.classList.add('active-modal');
         } else {
-            if (document.getElementsByClassName("show-modal").length === 1) {
+            if (document.getElementsByClassName("show-modal").length === 0) {
                 document.body.classList.remove('active-modal');
             }
         }
