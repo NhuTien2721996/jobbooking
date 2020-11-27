@@ -5,6 +5,7 @@ const initialState = {
         page:"",
         pagecount:"",
     },
+    peopleFilter:'',
     peopleTop:[],
     selects:[],
     listNation:[],
@@ -41,6 +42,8 @@ const searchPeople = (state = initialState, action) => {
             return {...state,toggleFormSearch:action.status};
         case types.GET_ALL_KEYWORD:
             return {...state,keyword:action.keyword};
+        case types.GET_DATA_PEOPLE_FILTER:
+            return {...state,peopleFilter:action.data};
         default:
             return state;
     }

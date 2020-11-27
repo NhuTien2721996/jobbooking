@@ -14,6 +14,19 @@ export const getAllPeoplePage = (data,page,pagecount) => {
         data,page,pagecount
     }
 }
+// export const getDataPeopleFilterRequest = (data) => {
+//     return (dispatch) => {
+//         return callApi('news/searchpeople', 'POST', data).then(res => {
+//             dispatch(getDataPeopleFilter(res.data.results));
+//         });
+//     }
+// };
+export const getDataPeopleFilter = (data) => {
+    return {
+        type: constants.GET_DATA_PEOPLE_FILTER,
+        data
+    }
+}
 export const getTopPeopleRequest = (data) => {
     return (dispatch) => {
         return callApi('news/find-best-peoples', 'POST', data).then(res => {

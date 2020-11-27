@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import {
-    getAllCityRequest, getAllDistrictRequest, getAllKeyword, getAllKeywordRequest,
+    getAllCityRequest, getAllDistrictRequest, getAllKeywordRequest,
     getAllNationsRequest,
-    getAllPeoplePageRequest, getAllWardRequest, getSelectsRequest, toggleFormSearch, toggleModal
+    getAllPeoplePageRequest, getAllWardRequest, getSelectsRequest, toggleFormSearch, toggleModal, getDataPeopleFilter
 } from "../../../states/duck/pages/findPeople/action";
 import {useTranslate, withTranslate} from 'react-redux-multilingual';
 import Paginator from "./PeopleListItem/paginator";
@@ -23,7 +23,6 @@ export const showRating = (number) => {
 
 const FindPeople = () => {
     const lang = useTranslate();
-    const page = useSelector(state => state.searchPeople.page);
     return (
         <React.Fragment>
             <section className="section section-find">
@@ -43,9 +42,8 @@ const FindPeople = () => {
                                         </div>
                                         <div className="content-form__content">
                                             <div className="form-select">
-                                                <FormSelect page={page}/>
+                                                <FormSelect/>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +84,6 @@ const FormSelect = () => {
     const [codeWard, setCodeWard] = useState('');
     const [ratingFrom, setRatingFrom] = useState('');
     const [ratingTo, setRatingTo] = useState('');
-
     const rating = [
         {value: '1', label: '1 sao'},
         {value: '2', label: '2 sao'},
@@ -108,7 +105,7 @@ const FormSelect = () => {
             skills: [""],
             wardid: codeWard,
         }
-        dispatch(getAllPeoplePageRequest(people))
+        dispatch(getDataPeopleFilter(people))
     }
     const getFormSearch = (status) => {
         dispatch(toggleFormSearch(status))
@@ -520,47 +517,51 @@ const ModalPeoplePage = () => {
 //Get all people
 
 const ListPeople = () => {
-    const dataPeoplePage = useSelector(state => state.searchPeople.people.listPeople);
+    const dataPeopleFilter = useSelector(state => state.searchPeople.peopleFilter)
+    const dataPeople = useSelector(state => state.searchPeople.people.listPeople);
     const page = useSelector(state => state.searchPeople.page);
     const lang = useTranslate();
     const dispatch = useDispatch();
     const onToggle = (id, status) => {
         dispatch(toggleModal(status));
-
         let peopleDetail = {
             IDCustomer: id,
             pageIndex: page
         }
         dispatch(getPeopleDetailRequest(peopleDetail))
     }
+
     useEffect(() => {
         let people;
-        people = {
-            customer_career: null,
-            districtid: null,
-            field: null,
-            pageindex: page,
-            pagesize: 12,
-            provinceid: null,
-            ratingfrom: null,
-            ratingto: null,
-            skills: [""],
-            wardid: null,
+        if (dataPeopleFilter) {
+            people = dataPeopleFilter;
+        } else {
+            people = {
+                customer_career: null,
+                districtid: null,
+                field: null,
+                pageindex: page,
+                pagesize: 12,
+                provinceid: null,
+                ratingfrom: null,
+                ratingto: null,
+                skills: [""],
+                wardid: null,
+            }
         }
         dispatch(getAllPeoplePageRequest(people))
-    }, [dispatch, page]);
+    }, [dataPeopleFilter, dispatch, page]);
 
     return (
         <div className="bs-row row-tn-5 row-xs-5 row-sm-10 row-md-15">
-            {dataPeoplePage.length > 0 ? dataPeoplePage.map((item, index) => {
-                    return <div
-                        className="bs-col tn-100-5 xs-100-5 sm-50-10 md-50-15 lg-33-15"
-                        key={index}>
+            {dataPeople.length > 0 ? dataPeople.map((item, index) => {
+                    return <div className="bs-col tn-100-5 xs-100-5 sm-50-10 md-50-15 lg-33-15"
+                                key={index}>
                         <div className="item" data-aos="fade-up" data-aos-delay="300"
                              onClick={() => onToggle(item.id, true)}>
                             <div className="avatar">
                                 <img
-                                    src={`https://api.jobbooking.com/Upload/Customer/${getDate(dataPeoplePage)[index]}/${item.filename1}`}
+                                    src={`https://api.jobbooking.com/Upload/Customer/${getDate(dataPeople)[index]}/${item.filename1}`}
                                     alt={item.fullname}/>
                             </div>
                             <div className="info">
@@ -627,11 +628,6 @@ const ListPeople = () => {
                 })
                 : <div className="bs-col tn-100-5">
                     <p className="noti" style={{textAlign: "center"}}>Không có dữ liệu</p>
-                    {/*<div className="noti-icon" style={{textAlign: "center"}}>*/}
-                    {/*    <img src="https://jobbooking.com/static/images/loading.gif" alt=""*/}
-                    {/*         style={{transitionDelay: "2000"}}/>*/}
-
-                    {/*</div>*/}
                 </div>}
         </div>
     );
